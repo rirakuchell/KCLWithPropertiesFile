@@ -12,7 +12,18 @@ wget http://mirrors.whoishostingthis.com/apache/maven/maven-3/3.3.9/binaries/apa
 unzip apache-maven-3.3.9-bin.zip
 echo "export PATH=\$PATH:/home/ec2-user/apache-maven-3.3.9/bin" >> .bashrc
 git clone https://github.com/rirakuchell/KCLWithPropertiesFile.git
-mkdir ./chief/logs
-chown -R ec2-user ./chief
+mkdir ./KCLWithPropertiesFile/logs
+chown -R ec2-user ./KCLWithPropertiesFile
 EOF
 ```
+
+```
+cd ~/KCLWithPropertiesFile
+mvn clean compile assembly:single
+```
+
+```
+nohup bash -c \
+"(java -cp ./target/KCL-CommonProcessor-Propertiesfile-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.example.chief.consumer.ChiefOrderFactoryS3Executor > ~/chief/logs/ChiefOrderFactoryS3Executor.log) \
+ &> ~/chief/logs/ChiefOrderFactoryS3Executor.log" &
+ ```
