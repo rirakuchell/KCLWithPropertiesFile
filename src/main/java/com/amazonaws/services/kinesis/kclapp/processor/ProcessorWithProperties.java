@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.amazonaws.ClientConfiguration;
 import com.amazonaws.services.kinesis.clientlibrary.config.KinesisClientLibConfigurator;
 import com.amazonaws.services.kinesis.clientlibrary.interfaces.v2.IRecordProcessorFactory;
 import com.amazonaws.services.kinesis.clientlibrary.lib.worker.KinesisClientLibConfiguration;
@@ -82,6 +83,12 @@ public class ProcessorWithProperties {
         KinesisClientLibConfigurator configurator = new KinesisClientLibConfigurator();
         KinesisClientLibConfiguration kclConfig = configurator.getConfiguration(loadPropertiesFile("kcl.properties"));
 
+        //test purpose
+        ClientConfiguration clientConfiguration = new ClientConfiguration();
+        clientConfiguration.withConnectionTimeout(1000);
+        clientConfiguration.withRequestTimeout(10000);
+        kclConfig.withCommonClientConfig(clientConfiguration);
+        
         IRecordProcessorFactory recordProcessorFactory = new RecordProcessorFactoryWithProperties();
 
         // Create the KCL worker with the stock trade record processor factory
