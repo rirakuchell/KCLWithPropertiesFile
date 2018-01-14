@@ -24,6 +24,6 @@ mvn clean compile assembly:single
 
 ```
 nohup bash -c \
-"(java -cp ./target/KCL-CommonProcessor-Propertiesfile-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.example.chief.consumer.ChiefOrderFactoryS3Executor > ~/chief/logs/ChiefOrderFactoryS3Executor.log) \
- &> ~/chief/logs/ChiefOrderFactoryS3Executor.log" &
+"(java -cp ./target/KCL-CommonProcessor-Propertiesfile-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.amazonaws.services.kinesis.kclapp.processor.ProcessorWithProperties > ~/KCLWithPropertiesFile/logs/ProcessorWithProperties.log) \
+ &> ~/KCLWithPropertiesFile/logs/ProcessorWithProperties.log" &
  ```
